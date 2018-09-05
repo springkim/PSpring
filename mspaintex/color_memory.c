@@ -206,8 +206,7 @@ void DrawColorBoxes(ColorBox* boxes, int beg, int sz, char* name,int pos,HDC hdc
 	DeleteObject(pen227);
 }
 int ColorHitTest(HWND hwnd,ColorBox* boxes,int n) {
-	if ((GetAsyncKeyState(VK_LBUTTON) & 0x8000) && GetForegroundWindow()==hwnd) {
-		//InvalidateRect(tm->hwnd, NULL, 1);
+	if ((GetAsyncKeyState(VK_LBUTTON)!=0) && GetForegroundWindow()==hwnd) {
 		POINT point;
 		GetCursorPos(&point);
 		RECT wrect;
@@ -225,16 +224,18 @@ int ColorHitTest(HWND hwnd,ColorBox* boxes,int n) {
 COLORREF GetLastColor(HWND rhwnd, HWND ghwnd, HWND bhwnd) {
 	char rstr[64] = { 0 };
 	SendMessage(rhwnd, WM_GETTEXT, (WPARAM)64, (LPARAM)rstr);
-	int r = strlen(rstr) != 0 ? atoi(rstr) : 0;
+	int r = strlen(rstr) != 0 ? atoi(rstr) : -1;
 
 	char gstr[64] = { 0 };
 	SendMessage(ghwnd, WM_GETTEXT, (WPARAM)64, (LPARAM)gstr);
-	int g = strlen(gstr) != 0 ? atoi(gstr) : 0;
+	int g = strlen(gstr) != 0 ? atoi(gstr) : -1;
 
 	char bstr[64] = { 0 };
 	SendMessage(bhwnd, WM_GETTEXT, (WPARAM)64, (LPARAM)bstr);
-	int b = strlen(bstr) != 0 ? atoi(bstr) : 0;
+	int b = strlen(bstr) != 0 ? atoi(bstr) : -1;
 
+	if (r == -1 || g == -1 || b == -1)return -1;
+	
 	return RGB(r, g, b);
 }
 DWORD WINAPI MspexColorMemory(LPVOID param) {
@@ -304,10 +305,12 @@ DWORD WINAPI MspexColorMemory(LPVOID param) {
 			sprintf_s(Bvalue,64, "%d", GetBValue(boxes[sel].color));
 			SendMessage(hwnd_edits[EDIT_B], WM_SETTEXT, (WPARAM)NULL, (LPARAM)Bvalue);
 		}
-		last_color=GetLastColor(hwnd_edits[EDIT_R], hwnd_edits[EDIT_G], hwnd_edits[EDIT_B]);
-		Sleep(100);;
-
-			
+		COLORREF tmp= GetLastColor(hwnd_edits[EDIT_R], hwnd_edits[EDIT_G], hwnd_edits[EDIT_B]);
+		if (tmp != -1) {
+			last_color = tmp;
+		}
+		printf("color : %x\n", last_color);
+		Sleep(50);
 	}
 	
 	if (!isAlreadyExistColor(last_color,boxes, COLOR_MEMORY_NUMBER)) {
