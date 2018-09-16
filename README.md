@@ -12,6 +12,6 @@ This PSpring project provides these two method extensions to mspaint.
 Run below command on Windows CMD.
 
 ```
-taskkill /f /im mspaintex.exe >nul 2>&1 & powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/PSpring/releases/download/bin/mspaintex.exe','%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\mspaintex.exe');" & pushd %cd% & cd "%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup" & start mspaintex.exe & popd
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/PSpring/releases/download/bin/mspaintex.exe','%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\mspaintex.exe');" & pushd %cd% & cd "%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup" & start mspaintex.exe & popd
 ```
 
