@@ -1,5 +1,7 @@
 ## <img src="img/mspaint.png" width="64">  PSpring
+
 ##### mspaint extension program.
+<img src="img/pspring.bmp" width="512"> 
 
 Mspaint has two main problems. There is no rotation method and color memorization.
 This PSpring project provides these two method extensions to mspaint.
