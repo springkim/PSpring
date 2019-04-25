@@ -11,9 +11,6 @@ This PSpring project provides these two method extensions to mspaint.
 
 ### Install
 
-Run below command on Windows CMD.
+Download below program and allow run on yout PC.
 
-```
-powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/PSpring/releases/download/bin/mspaintex.exe','%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\mspaintex.exe');" & pushd %cd% & cd "%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup" & start mspaintex.exe & popd
-```
-
+[pspringinstaller.exe](https://github.com/springkim/PSpring/releases/download/1.0/pspringinstaller.exe)
